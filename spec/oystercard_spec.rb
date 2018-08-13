@@ -18,7 +18,8 @@ describe Oystercard do
   end
 
   it 'caps the oystercard limit to £90' do
-    subject.add_money(90)
-    expect { subject.add_money(1) }.to raise_error 'max limit reached'
+    max_balance = Oystercard::MAX_LIMIT
+    subject.add_money(max_balance)
+    expect { subject.add_money(1) }.to raise_error "max limit of #{max_balance} reached"
   end
 end

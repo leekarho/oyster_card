@@ -8,7 +8,7 @@ class Oystercard
   end
 
   def add_money(money)
-    raise 'max limit reached' if @balance >= MAX_LIMIT
+    raise "max limit of #{MAX_LIMIT} reached" if @balance >= MAX_LIMIT
     @balance += money
   end
 end
