@@ -13,4 +13,7 @@ describe Oystercard do
     expect(subject.add_money(50)).to eq subject.balance
   end
 
+  it 'tops up the balance by 1' do
+    expect { subject.add_money(1) }.to change{ subject.balance }.by 1
+  end
 end
