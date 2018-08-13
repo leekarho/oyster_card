@@ -66,5 +66,10 @@ describe Oystercard do
       subject.touch_in
       expect(subject.in_journey?).to eq(true)
     end
+
+    it "responds to touch_out" do
+      subject.touch_out
+      expect(subject.in_journey?).to eq(false)
+    end
   end
 end

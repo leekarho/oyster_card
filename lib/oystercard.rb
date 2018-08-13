@@ -17,15 +17,15 @@ class Oystercard
   end
 
   def touch_in
-    true
+    @in_journey = true
   end
 
   def touch_out
-    false
+    @in_journey = false
   end
 
   def in_journey?
-    true
+    @in_journey
   end
 
 
