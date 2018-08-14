@@ -26,20 +26,6 @@ describe Oystercard do
     end
   end
 
-  describe '#deduct' do
-
-    it 'deducts money from oystercard' do
-      subject.add_money(60)
-      expect { subject.deduct(5) }.to change{ subject.balance }.by -5
-    end
-
-    it 'raises error if balance is below minimum fare' do
-      Oystercard.new(1).deduct(Oystercard::MIN_CHARGE)
-      expect { subject.touch_in }.to raise_error "not enough funds. please top-up"
-    end
-
-  end
-
   describe '#touch_in' do
 
     it 'responds to touch_in' do
@@ -61,6 +47,12 @@ describe Oystercard do
     it "returns false if touch_out" do
       expect(subject.touch_out).to eq false
     end
+
+    it "returns the correct balance after touch-out" do
+      subject.add_money(10)
+      subject.touch_in
+      expect { subject.touch_out }.to change { subject.balance }.by -Oystercard::MIN_CHARGE
+    end
   end
 
   describe "#in_journey" do
@@ -69,9 +61,9 @@ describe Oystercard do
     end
 
     # it "responds to touch_in" do
-    #   allow(subject).to receive(:in_journey?).and_return(true)
+    #   allow(subject).to receive(:in_journey).and_return(true)
     #   # subject.touch_in
-    #   expect(subject.in_journey?).to eq(true)
+    #   expect(subject.in_journey).to eq(true)
     # end
 
     it "responds to touch_out" do
