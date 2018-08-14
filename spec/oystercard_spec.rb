@@ -1,6 +1,9 @@
 require 'oystercard'
 
 describe Oystercard do
+
+  let(:station){ double :station }
+
   it 'sets default value to 0' do
     expect(subject.balance).to eq 0
   end
@@ -32,9 +35,15 @@ describe Oystercard do
       expect(subject).to respond_to(:touch_in)
     end
 
-     it 'returns true if touch_in' do
-       expect(subject).not_to be_in_journey
-     end
+    it 'returns true if touch_in' do
+      expect(subject).not_to be_in_journey
+    end
+
+    it 'stores the entry station when touched-in' do
+      subject.add_money(10)
+      subject.touch_in(station)
+      expect(subject.entry_station).to eq station
+    end
 
   end
 
@@ -45,12 +54,12 @@ describe Oystercard do
     end
 
     it "returns false if touch_out" do
-      expect(subject.touch_out).to eq false
+      expect(subject.touch_out).to eq nil
     end
 
     it "returns the correct balance after touch-out" do
       subject.add_money(10)
-      subject.touch_in
+      subject.touch_in(station)
       expect { subject.touch_out }.to change { subject.balance }.by -Oystercard::MIN_CHARGE
     end
   end
@@ -60,11 +69,11 @@ describe Oystercard do
       expect(subject).to respond_to(:in_journey?)
     end
 
-    # it "responds to touch_in" do
-    #   allow(subject).to receive(:in_journey).and_return(true)
-    #   # subject.touch_in
-    #   expect(subject.in_journey).to eq(true)
-    # end
+    it "responds to touch_in" do
+      subject.add_money(10)
+      subject.touch_in(station)
+      expect(subject.in_journey?).to eq(true)
+    end
 
     it "responds to touch_out" do
       subject.touch_out
@@ -73,7 +82,7 @@ describe Oystercard do
 
     it "can touch out" do
       allow(subject).to receive(:touch_in) { true }
-      subject.touch_in
+      subject.touch_in(station)
       subject.touch_out
       expect(subject).not_to be_in_journey
     end
