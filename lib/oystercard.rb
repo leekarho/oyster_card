@@ -22,9 +22,9 @@ class Oystercard
     @journey.start(station)
   end
 
-  def touch_out(exit_station = nil)
-    @journey.finish(exit_station)
-    puts deduct(MIN_CHARGE)
+  def touch_out(exit_st = nil)
+    @journey.finish(exit_st)
+    deduct(@journey.fare)
   end
 
   private

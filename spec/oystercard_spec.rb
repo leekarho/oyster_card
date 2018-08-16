@@ -10,7 +10,7 @@ describe Oystercard do
   end
 
   it "sets the journey_list to empty by default" do
-    expect(Oystercard.new.journey.journey_list).to be_empty
+    expect(Oystercard.new.journey.journey_list).to eq ( { entry: [], exit: [] } )
   end
 
   describe '#add_money' do
@@ -107,7 +107,7 @@ describe Oystercard do
       subject.add_money(Oystercard::MAX_LIMIT)
       subject.touch_in(station)
       subject.touch_out(exit_station)
-      expect(subject.journey.journey_list).to eq ( {:entry => station, :exit => exit_station} )
+      expect(subject.journey.journey_list).to eq ( {:entry => [station], :exit => [exit_station]} )
     end
 
 

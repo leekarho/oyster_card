@@ -6,7 +6,4 @@ describe Station do
     expect([st.name, st.zone]).to eq [:AE, 1]
   end
 
-  # it "returns station name" do
-  #   expect(subject).to respond_to(:name)
-  # end
 end
