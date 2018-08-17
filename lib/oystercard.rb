@@ -1,5 +1,6 @@
 require_relative 'journey'
 require_relative 'station'
+require_relative 'journey_log'
 
 class Oystercard
   attr_reader :balance, :journey
@@ -7,7 +8,7 @@ class Oystercard
   MAX_LIMIT = 90
   MIN_CHARGE = 1
 
-  def initialize (balance = 0, journey = Journey.new)
+  def initialize (balance = 0, journey = Journey_log.new)
     @balance = balance
     @journey = journey
   end

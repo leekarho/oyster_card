@@ -7,7 +7,7 @@ describe Journey do
 
   it 'calculates fare' do
     subject.start(nil)
-    expect (subject.fare).to eq Journey::PEN_CHARGE
+    expect(subject.fare).to eq (Journey::PEN_CHARGE)
   end
 
 end
