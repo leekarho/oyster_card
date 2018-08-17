@@ -1,11 +1,17 @@
 class Journey
 
-  attr_reader :entry_station, :journey_list, :journey_arr, :exit_station
-
   MIN_CHARGE = 1
   PEN_CHARGE = 6
 
-  def fare(entry_station, exit_station)
+  def start(station)
+    @entry_station = station
+  end
+
+  def finish(exit_st)
+    @exit_station = exit_st
+  end
+
+  def fare
     @entry_station == nil || @exit_station == nil ? PEN_CHARGE : MIN_CHARGE
   end
 end

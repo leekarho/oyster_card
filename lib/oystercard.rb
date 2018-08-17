@@ -8,9 +8,9 @@ class Oystercard
   MAX_LIMIT = 90
   MIN_CHARGE = 1
 
-  def initialize (balance = 0, journey = Journey_log.new)
+  def initialize (balance = 0, journey_log = Journey_log.new)
     @balance = balance
-    @journey = journey
+    @journey_log = journey_log
   end
 
   def add_money(money)
@@ -20,12 +20,12 @@ class Oystercard
 
   def touch_in(station = nil)
     raise "not enough funds. please top-up" if @balance < MIN_CHARGE
-    @journey.start(station)
+    @journey_log.start(station)
   end
 
   def touch_out(exit_st = nil)
-    @journey.finish(exit_st)
-    deduct(@journey.fare)
+    @journey_log.finish(exit_st)
+    deduct(@journey_log.fare)
   end
 
   private

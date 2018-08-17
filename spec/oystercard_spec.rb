@@ -91,13 +91,7 @@ describe Oystercard do
 
   describe "#journey-list" do
     it "stores a list of stations on journey" do
-      # allow(journey_log).to receive(:start)
-      # allow(journey_log).to receive(:finish)
-      # allow(journey_log).to receive(:fare).and_return Oystercard::MIN_CHARGE
       allow(journey_log).to receive(:journey_arr).and_return ( [{:entry => station, :exit => exit_station}] )
-      # subject.add_money(Oystercard::MAX_LIMIT)
-      # subject.touch_in(station)
-      # subject.touch_out(exit_station)
       expect(subject.journey.journey_arr).to eq ( [{:entry => station, :exit => exit_station}] )
     end
   end
