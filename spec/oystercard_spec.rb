@@ -41,9 +41,9 @@ describe Oystercard do
     it 'returns true if touch_in' do
       allow(journey_log).to receive(:start)
       subject.add_money(5)
-      subject.journey.start(station)
+      subject.touch_in(station)
       allow(journey_log).to receive(:in_journey?).and_return true
-      expect(subject.journey.in_journey?).to eq true
+      expect(subject.journey_log.in_journey?).to eq true
     end
 
     it 'stores the entry station when touched-in' do
@@ -51,7 +51,7 @@ describe Oystercard do
       subject.add_money(10)
       subject.touch_in(station)
       allow(journey_log).to receive(:entry_station).and_return station
-      expect(subject.journey.entry_station).to eq station
+      expect(subject.journey_log.entry_station).to eq station
     end
 
   end
@@ -67,7 +67,7 @@ describe Oystercard do
       allow(journey_log).to receive(:fare).and_return Oystercard::MAX_LIMIT
       subject.touch_out(exit_station)
       allow(journey_log).to receive(:in_journey?).and_return false
-      expect(subject.journey.in_journey?).to eq false
+      expect(subject.journey_log.in_journey?).to eq false
     end
 
     it "returns the correct balance after touch-out" do
@@ -84,7 +84,7 @@ describe Oystercard do
       allow(journey_log).to receive(:fare).and_return Oystercard::MIN_CHARGE
       allow(journey_log).to receive(:exit_station).and_return exit_station
       subject.touch_out(exit_station)
-      expect(subject.journey.exit_station).to eq exit_station
+      expect(subject.journey_log.exit_station).to eq exit_station
     end
 
   end
@@ -92,7 +92,7 @@ describe Oystercard do
   describe "#journey-list" do
     it "stores a list of stations on journey" do
       allow(journey_log).to receive(:journey_arr).and_return ( [{:entry => station, :exit => exit_station}] )
-      expect(subject.journey.journey_arr).to eq ( [{:entry => station, :exit => exit_station}] )
+      expect(subject.journey_log.journey_arr).to eq ( [{:entry => station, :exit => exit_station}] )
     end
   end
 end

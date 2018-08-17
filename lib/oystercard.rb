@@ -3,7 +3,7 @@ require_relative 'station'
 require_relative 'journey_log'
 
 class Oystercard
-  attr_reader :balance, :journey
+  attr_reader :balance, :journey_log
 
   MAX_LIMIT = 90
   MIN_CHARGE = 1
